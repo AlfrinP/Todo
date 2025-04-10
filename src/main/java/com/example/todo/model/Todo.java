@@ -1,9 +1,12 @@
+package com.example.todo.model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
+
 
 @Entity
 public class Todo {
@@ -12,11 +15,21 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+    private String description;
 
     @Enumerated(EnumType.ORDINAL)
     private Status status;
 
-    // Getters and Setters
+    public Todo(){};
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public long getId() {
         return id;
     }
@@ -40,10 +53,12 @@ public class Todo {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    public enum Status {
+        COMPLETED,
+        IN_PROGRESS,
+        DELETED
+    }
+
 }
 
-enum Status {
-    COMPLETED,
-    IN_PROGRESS,
-    DELETED
-}
